@@ -19,6 +19,7 @@ module.exports = {
     project: "./tsconfig.json",
     tsconfigRootDir: "./",
   },
+  ignorePatterns: [".eslintrc.cjs", "vite.config.ts"],
   plugins: ["react", "@typescript-eslint", "security", "import"],
   extends: [
     "plugin:react/recommended",
