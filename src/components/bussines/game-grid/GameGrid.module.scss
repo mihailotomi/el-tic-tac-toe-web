@@ -17,8 +17,15 @@
   gap: 1%;
 }
 
+.question-img {
+  height: 80%;
+}
+
 .question-square {
   background-color: rgba(128, 128, 128, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .answer-square {

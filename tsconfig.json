@@ -8,7 +8,9 @@
     "noImplicitAny": true,
     "baseUrl": "./", // This must be specified if "paths" is set
     "paths": {
-      "@components": ["src/components"]
+      "@components": ["src/components/"],
+      "@api": ["src/store/api/"],
+      "@store": ["src/store/"]
     },
 
     /* Bundler mode */

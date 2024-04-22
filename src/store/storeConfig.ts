@@ -2,10 +2,13 @@ import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
+import { gridApi } from "./api/gridApi";
+
 export const store = configureStore({
   reducer: {
-    // add reducers here
+    [gridApi.reducerPath]: gridApi.reducer,
   },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false }).concat(gridApi.middleware),
 });
 
 setupListeners(store.dispatch);
