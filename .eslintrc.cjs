@@ -78,5 +78,6 @@ module.exports = {
     "no-plusplus": "off",
     "security/detect-unsafe-regex": "off",
     "@typescript-eslint/no-floating-promises": "off",
+    "react/no-array-index-key": "off",
   },
 };

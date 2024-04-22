@@ -7,7 +7,9 @@
     "skipLibCheck": true,
     "noImplicitAny": true,
     "baseUrl": "./", // This must be specified if "paths" is set
-    "paths": {},
+    "paths": {
+      "@components": ["src/components"]
+    },
 
     /* Bundler mode */
     "moduleResolution": "bundler",

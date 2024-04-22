@@ -1,5 +1,11 @@
+import { GameGrid } from "./components/bussines";
+
+import "./styles/index.scss";
+
 function App() {
-  return <>React</>;
+  return (
+    <GameGrid />
+  );
 }
 
 export default App;
