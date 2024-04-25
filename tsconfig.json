@@ -10,7 +10,10 @@
     "paths": {
       "@components": ["src/components/"],
       "@api": ["src/store/api/"],
-      "@store": ["src/store/"]
+      "@entities": ["src/entities"],
+      "@store": ["src/store/"],
+      "@components/base": ["src/components/base"],
+      "@components/bussines": ["src/components/bussines"]
     },
 
     /* Bundler mode */

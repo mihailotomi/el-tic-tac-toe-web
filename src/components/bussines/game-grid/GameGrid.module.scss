@@ -1,20 +1,27 @@
-.game-grid {
-  display: grid;
-  min-height: 60vh;
-  max-height: 60vw;
-  min-width: 60vh;
-  max-width: 60vw;
+.grid-wrapper {
+  position: relative;
+  min-height: 50vh;
+  max-height: 50vw;
+  min-width: 50vh;
+  max-width: 50vw;
 
   @media (max-width: 720px) {
-    min-height: 70vw;
-    max-height: 70vh;
-    min-width: 70vw;
-    max-width: 70vh6
+    min-height: 50vw;
+    max-height: 50vh;
+    min-width: 50vw;
+    max-width: 50vh;
   }
 
-  grid-template-columns: repeat(4, 20%);
-  grid-template-rows: repeat(4, 20%);
-  gap: 1%;
+  display: flex;
+}
+
+.game-grid {
+  display: grid;
+  width: 100%;
+
+  grid-template-columns: repeat(4, 24%);
+  grid-template-rows: repeat(4, 24%);
+  gap: 1.25%;
 }
 
 .question-img {
@@ -30,4 +37,31 @@
 
 .answer-square {
   background-color: rgba(0, 100, 255, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input-wrapper {
+  position: absolute;
+  top: 27%;
+  bottom: 2%;
+  left: 27%;
+  padding: 1rem;
+  right: 2%;
+  background-color: rgba(255, 255, 255, 0.7);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+}
+
+.input {
+  flex-grow: 1;
+  border-radius: 1rem;
+  max-height: 5%;
+}
+
+.cancel-wrapper {
+  display: flex;
+  justify-content: end;
 }

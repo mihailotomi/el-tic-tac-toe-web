@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
-import { CircularProgress, debounce } from "@mui/material";
+import { debounce } from "@mui/material";
 
 export type AsyncAutocompleteProps<T> = {
   fetchOptions: (search: string) => void;
@@ -12,6 +12,7 @@ export type AsyncAutocompleteProps<T> = {
   checkOptionMatch: (option: T, value: T) => boolean;
   label: string;
   noOptionsLabel?: string;
+  inputClassName?: string;
 };
 
 export function AsyncAutocomplete<T>({
@@ -23,6 +24,7 @@ export function AsyncAutocomplete<T>({
   label,
   checkOptionMatch,
   noOptionsLabel = "No options",
+  inputClassName = "",
 }: AsyncAutocompleteProps<T>) {
   const [value, setValue] = useState<T | null>(null);
   const [options, setOptions] = useState<readonly T[]>([]);
@@ -54,7 +56,7 @@ export function AsyncAutocomplete<T>({
   return (
     <Autocomplete
       id="asynchronous-demo"
-      sx={{ width: 300 }}
+      sx={{ flexGrow: 1, maxHeight:"100%" }}
       options={options}
       filterOptions={(x) => x}
       getOptionLabel={getOptionLabel}
@@ -72,11 +74,7 @@ export function AsyncAutocomplete<T>({
       onInputChange={(_event, newInputValue) => {
         onInputChangeHandler(newInputValue);
       }}
-      renderInput={(params) => (
-        <TextField {...params} label={label} fullWidth>
-            <CircularProgress />
-          </TextField>
-      )}
+      renderInput={(params) => <TextField {...params} label={label} className={inputClassName} fullWidth />}
       loading={loading}
     />
   );

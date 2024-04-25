@@ -1,19 +1,24 @@
 import { useEffect, useState } from "react";
-import { Club } from "src/entities";
-import { useLazyGetRandomGridQuery, useLazySearchPlayersAutocompleteQuery } from "../../../store";
+
+import { useLazyGetRandomGridQuery } from "@api";
+
+import { Answers, QuestionsAxis } from "./gameGrid.types";
 
 export function useGameGrid() {
-  const [searchPlayers, { data: players, isFetching: isSearchingPlayers }] = useLazySearchPlayersAutocompleteQuery();
-
-  const [questionsX, setQuestionsX] = useState<[Club | null, Club | null, Club | null]>([null, null, null]);
-  const [questionsY, setQuestionsY] = useState<[Club | null, Club | null, Club | null]>([null, null, null]);
-  const [answers, _setAnswers] = useState([
-    ["", "", ""],
-    ["", "", ""],
-    ["", "", ""],
+  const [questionsX, setQuestionsX] = useState<QuestionsAxis>([null, null, null]);
+  const [questionsY, setQuestionsY] = useState<QuestionsAxis>([null, null, null]);
+  const [answers, _setAnswers] = useState<Answers>([
+    [null, null, null],
+    [null, null, null],
+    [null, null, null],
   ]);
+  const [selectedAnswerPosition, setSelectedAnswerPosition] = useState<{ x: number; y: number } | null>(null);
 
   const [fetchGrid, { data }] = useLazyGetRandomGridQuery();
+
+  const onSelectAnswerPositionHandler = (row: number, column: number) => {
+    setSelectedAnswerPosition({ x: column, y: row });
+  };
 
   useEffect(() => {
     fetchGrid();
@@ -32,8 +37,7 @@ export function useGameGrid() {
       y: questionsY,
     },
     answers,
-    players,
-    searchPlayers,
-    isSearchingPlayers,
+    isInputOpen: !!selectedAnswerPosition,
+    onSelectAnswerPositionHandler
   };
 }
