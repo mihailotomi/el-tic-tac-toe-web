@@ -10,11 +10,18 @@ import { useGameGrid } from "./useGameGrid";
 import styles from "./GameGrid.module.scss";
 
 export function GameGrid() {
-  const { questions, answers, isInputOpen, onSelectAnswerPositionHandler } = useGameGrid();
+  const {
+    questions,
+    answers,
+    isInputOpen,
+    onSelectAnswerPositionHandler,
+    onCancelAnswerHandler,
+    onChosePlayerHandler,
+  } = useGameGrid();
 
   return (
     <section className={styles.gridWrapper}>
-      <GameGridInput isOpen={isInputOpen} />
+      <GameGridInput isOpen={isInputOpen} onChosePlayer={onChosePlayerHandler} onCancel={onCancelAnswerHandler} />
       <div className={styles.gameGrid}>
         <div />
         {questions.x.map((q, index) => (
@@ -32,11 +39,12 @@ export function GameGrid() {
             {row.map((_, columnIndex) => (
               <div className={styles.answerSquare} key={`a-${rowIndex}-${columnIndex}`}>
                 {answers[rowIndex][columnIndex] ? (
-                  "dsad"
+                  <img src={answers[rowIndex][columnIndex]?.imageUrl} alt="" className={styles.questionImg} />
                 ) : (
                   <IconButton
-                    aria-label="delete"
+                    aria-label="add"
                     size="large"
+                    className={styles.selectAnswerButton}
                     onClick={() => onSelectAnswerPositionHandler(rowIndex, columnIndex)}
                   >
                     <Add fontSize="large" />

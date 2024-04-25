@@ -42,6 +42,12 @@
   align-items: center;
 }
 
+.select-answer-button {
+  &:focus {
+    outline: none !important;
+  }
+}
+
 .input-wrapper {
   position: absolute;
   top: 27%;
