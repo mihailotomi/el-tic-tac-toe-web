@@ -79,5 +79,6 @@ module.exports = {
     "security/detect-unsafe-regex": "off",
     "@typescript-eslint/no-floating-promises": "off",
     "react/no-array-index-key": "off",
+    "@typescript-eslint/no-misused-promises": "off",
   },
 };

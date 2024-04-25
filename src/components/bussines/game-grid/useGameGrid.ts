@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { Club } from "src/entities";
-import { useLazyGetRandomGridQuery } from "../../../store";
+import { useLazyGetRandomGridQuery, useLazySearchPlayersAutocompleteQuery } from "../../../store";
 
 export function useGameGrid() {
+  const [searchPlayers, { data: players, isFetching: isSearchingPlayers }] = useLazySearchPlayersAutocompleteQuery();
+
   const [questionsX, setQuestionsX] = useState<[Club | null, Club | null, Club | null]>([null, null, null]);
   const [questionsY, setQuestionsY] = useState<[Club | null, Club | null, Club | null]>([null, null, null]);
   const [answers, _setAnswers] = useState([
@@ -30,5 +32,8 @@ export function useGameGrid() {
       y: questionsY,
     },
     answers,
+    players,
+    searchPlayers,
+    isSearchingPlayers,
   };
 }

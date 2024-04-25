@@ -1,19 +1,19 @@
 .game-grid {
   display: grid;
-  min-height: 70vh;
-  max-height: 70vw;
-  min-width: 70vh;
-  max-width: 70vw;
+  min-height: 60vh;
+  max-height: 60vw;
+  min-width: 60vh;
+  max-width: 60vw;
 
   @media (max-width: 720px) {
     min-height: 70vw;
     max-height: 70vh;
     min-width: 70vw;
-    max-width: 70vh;
+    max-width: 70vh6
   }
 
-  grid-template-columns: repeat(4, 24%);
-  grid-template-rows: repeat(4, 24%);
+  grid-template-columns: repeat(4, 20%);
+  grid-template-rows: repeat(4, 20%);
   gap: 1%;
 }
 
