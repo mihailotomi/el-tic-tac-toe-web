@@ -13,7 +13,8 @@
       "@entities": ["src/entities"],
       "@store": ["src/store/"],
       "@components/base": ["src/components/base"],
-      "@components/bussines": ["src/components/bussines"]
+      "@components/bussines": ["src/components/bussines"],
+      "@providers": ["src/providers"]
     },
 
     /* Bundler mode */

@@ -1,7 +1,7 @@
-import { useMemo, useState } from "react";
+import { useCallback, useState } from "react";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
-import { debounce } from "@mui/material";
+import { Box, CircularProgress, debounce } from "@mui/material";
 
 export type AsyncAutocompleteProps<T> = {
   fetchOptions: (search: string) => void;
@@ -28,11 +28,10 @@ export function AsyncAutocomplete<T>({
 }: AsyncAutocompleteProps<T>) {
   const [value, setValue] = useState<T | null>(null);
 
-  const fetch = useMemo(
-    () =>
-      debounce((input: string) => {
-        fetchOptions(input);
-      }, 500),
+  const fetch = useCallback(
+    debounce((input: string) => {
+      fetchOptions(input);
+    }, 500),
     [fetchOptions],
   );
 
@@ -68,6 +67,11 @@ export function AsyncAutocomplete<T>({
       }}
       renderInput={(params) => <TextField {...params} label={label} className={inputClassName} fullWidth />}
       loading={loading}
+      loadingText={
+        <Box sx={{ display: "flex", justifyContent: "center" }}>
+          <CircularProgress />
+        </Box>
+      }
     />
   );
 }

@@ -1,13 +1,12 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-import { useLazyCheckPlayerMatchQuery, useLazyGetRandomGridQuery } from "@api";
+import { useLazyCheckPlayerMatchQuery, useGetRandomGridQuery } from "@api";
 
 import { Club, Player } from "@entities";
 import { Answers, QuestionsAxis } from "./gameGrid.types";
 
 export function useGameGrid() {
-  const [questionsX, setQuestionsX] = useState<QuestionsAxis>([null, null, null]);
-  const [questionsY, setQuestionsY] = useState<QuestionsAxis>([null, null, null]);
+  // State
   const [answers, setAnswers] = useState<Answers>([
     [null, null, null],
     [null, null, null],
@@ -15,12 +14,16 @@ export function useGameGrid() {
   ]);
   const [selectedAnswerPosition, setSelectedAnswerPosition] = useState<{ x: number; y: number } | null>(null);
 
-  const [fetchGrid, { data: gridClubs }] = useLazyGetRandomGridQuery();
+  // API
+  const { data: gridClubs } = useGetRandomGridQuery();
   const [checkMatch] = useLazyCheckPlayerMatchQuery();
 
-  const onChosePlayerHandler = async (player: Player) => {
-    console.log(player, selectedAnswerPosition);
+  // Computed variables
+  const questionsX: QuestionsAxis = gridClubs?.x || [null, null, null];
+  const questionsY: QuestionsAxis = gridClubs?.y || [null, null, null];
 
+  // Event handlers
+  const onChosePlayerHandler = async (player: Player) => {
     if (selectedAnswerPosition) {
       const clubs = [questionsX[selectedAnswerPosition.x], questionsY[selectedAnswerPosition.y]] as Club[];
       const answer = await checkMatch({ player, clubs }).unwrap();
@@ -43,19 +46,6 @@ export function useGameGrid() {
     setSelectedAnswerPosition(null);
   };
 
-  useEffect(() => {
-    fetchGrid();
-  }, []);
-
-  useEffect(() => {
-    if (gridClubs?.x && gridClubs?.y) {
-      setQuestionsX(gridClubs.x);
-      setQuestionsY(gridClubs.y);
-    }
-  }, [gridClubs]);
-
-  useEffect(() => {}, []);
-
   return {
     questions: {
       x: questionsX,
@@ -66,6 +56,6 @@ export function useGameGrid() {
     onSelectAnswerPositionHandler,
     onCancelAnswerHandler,
     onChosePlayerHandler,
-    selectedAnswerPosition
+    selectedAnswerPosition,
   };
 }

@@ -7,10 +7,10 @@ export const gridApi = createApi({
     baseUrl: `http://localhost:3000/`,
   }),
   endpoints: (builder) => ({
-    getRandomGrid: builder.query<{ x: [Club, Club, Club], y: [Club, Club, Club] }, void>({
+    getRandomGrid: builder.query<{ x: [Club, Club, Club]; y: [Club, Club, Club] }, void>({
       query: () => "/grids/random",
     }),
   }),
 });
 
-export const { useLazyGetRandomGridQuery } = gridApi;
+export const { useGetRandomGridQuery } = gridApi;

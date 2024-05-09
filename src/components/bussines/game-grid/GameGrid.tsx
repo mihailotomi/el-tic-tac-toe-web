@@ -4,7 +4,7 @@ import { Add } from "@mui/icons-material";
 
 import { Club } from "@entities";
 
-import { GameGridInput } from "./GameGridInput";
+import { GameGridInput } from "./components/GameGridInput";
 import { useGameGrid } from "./useGameGrid";
 
 import styles from "./GameGrid.module.scss";
@@ -21,7 +21,7 @@ export function GameGrid() {
   } = useGameGrid();
 
   return (
-    <section className={styles.gridWrapper}>
+    <section className={styles.gameGridWrapper}>
       <GameGridInput
         key={JSON.stringify(selectedAnswerPosition)}
         isOpen={isInputOpen}
@@ -54,7 +54,7 @@ export function GameGrid() {
                   <IconButton
                     aria-label="add"
                     size="large"
-                    className={styles.selectAnswerButton}
+                    className={styles.answerSelectButton}
                     onClick={() => onSelectAnswerPositionHandler(rowIndex, columnIndex)}
                   >
                     <Add fontSize="large" />
