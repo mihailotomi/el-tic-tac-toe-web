@@ -11,7 +11,7 @@ export interface Player {
 
   country: string;
 
-  imageUrl: string;
+  imageUrl?: string;
 
   createdAt: Date;
 

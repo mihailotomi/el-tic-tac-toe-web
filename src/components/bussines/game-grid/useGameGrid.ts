@@ -66,5 +66,6 @@ export function useGameGrid() {
     onSelectAnswerPositionHandler,
     onCancelAnswerHandler,
     onChosePlayerHandler,
+    selectedAnswerPosition
   };
 }

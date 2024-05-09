@@ -18,7 +18,7 @@ export function GameGridInput({ isOpen, onCancel, onChosePlayer }: GameGridInput
   return isOpen ? (
     <div className={styles.inputWrapper}>
       <AsyncAutocomplete
-        data={players || []}
+        options={players || []}
         fetchOptions={searchPlayers}
         getOptionLabel={(player) => player.fullName}
         loading={isSearchingPlayers}

@@ -17,11 +17,17 @@ export function GameGrid() {
     onSelectAnswerPositionHandler,
     onCancelAnswerHandler,
     onChosePlayerHandler,
+    selectedAnswerPosition,
   } = useGameGrid();
 
   return (
     <section className={styles.gridWrapper}>
-      <GameGridInput isOpen={isInputOpen} onChosePlayer={onChosePlayerHandler} onCancel={onCancelAnswerHandler} />
+      <GameGridInput
+        key={JSON.stringify(selectedAnswerPosition)}
+        isOpen={isInputOpen}
+        onChosePlayer={onChosePlayerHandler}
+        onCancel={onCancelAnswerHandler}
+      />
       <div className={styles.gameGrid}>
         <div />
         {questions.x.map((q, index) => (
@@ -39,7 +45,11 @@ export function GameGrid() {
             {row.map((_, columnIndex) => (
               <div className={styles.answerSquare} key={`a-${rowIndex}-${columnIndex}`}>
                 {answers[rowIndex][columnIndex] ? (
-                  <img src={answers[rowIndex][columnIndex]?.imageUrl} alt="" className={styles.questionImg} />
+                  answers[rowIndex][columnIndex]?.imageUrl ? (
+                    <img src={answers[rowIndex][columnIndex]?.imageUrl} alt="" className={styles.questionImg} />
+                  ) : (
+                    answers[rowIndex][columnIndex]?.lastName
+                  )
                 ) : (
                   <IconButton
                     aria-label="add"

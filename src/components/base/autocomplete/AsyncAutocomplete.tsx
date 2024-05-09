@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import { debounce } from "@mui/material";
@@ -6,7 +6,7 @@ import { debounce } from "@mui/material";
 export type AsyncAutocompleteProps<T> = {
   fetchOptions: (search: string) => void;
   loading: boolean;
-  data: T[];
+  options: T[];
   getOptionLabel: (option: T) => string;
   onSubmit: (option: T) => void;
   checkOptionMatch: (option: T, value: T) => boolean;
@@ -19,7 +19,7 @@ export function AsyncAutocomplete<T>({
   fetchOptions,
   onSubmit,
   loading,
-  data,
+  options,
   getOptionLabel,
   label,
   checkOptionMatch,
@@ -27,7 +27,6 @@ export function AsyncAutocomplete<T>({
   inputClassName = "",
 }: AsyncAutocompleteProps<T>) {
   const [value, setValue] = useState<T | null>(null);
-  const [options, setOptions] = useState<readonly T[]>([]);
 
   const fetch = useMemo(
     () =>
@@ -37,26 +36,23 @@ export function AsyncAutocomplete<T>({
     [fetchOptions],
   );
 
-  useEffect(() => {
-    setOptions(data);
-  }, [data]);
-
-  const onInputChangeHandler = useCallback(
-    (inputValue: string) => {
-      if (inputValue === "") {
-        setOptions(value ? [value] : []);
-        return;
-      }
-
+  const onInputChangeHandler = (inputValue: string) => {
+    if (inputValue !== "") {
       fetch(inputValue);
-    },
-    [fetch],
-  );
+    }
+  };
+
+  const onChangeHandler = (newValue: T | null) => {
+    setValue(newValue);
+    if (newValue) {
+      onSubmit(newValue);
+    }
+  };
 
   return (
     <Autocomplete
       id="asynchronous-demo"
-      sx={{ flexGrow: 1, maxHeight:"100%" }}
+      sx={{ flexGrow: 1, maxHeight: "100%" }}
       options={options}
       filterOptions={(x) => x}
       getOptionLabel={getOptionLabel}
@@ -65,11 +61,7 @@ export function AsyncAutocomplete<T>({
       value={value}
       noOptionsText={noOptionsLabel}
       onChange={(_event, newValue: T | null) => {
-        setOptions(newValue ? [newValue] : []);
-        setValue(newValue);
-        if (newValue) {
-          onSubmit(newValue);
-        }
+        onChangeHandler(newValue);
       }}
       onInputChange={(_event, newInputValue) => {
         onInputChangeHandler(newInputValue);
