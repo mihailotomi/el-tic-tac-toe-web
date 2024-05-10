@@ -1,6 +1,9 @@
 import { Club, Player } from "@entities";
 
-export type QuestionsAxis = [Club | null, Club | null, Club | null];
+export type Question = Club | null;
+
+export type QuestionsAxis = [Question, Question, Question];
+
 export type Answers = [
   [Player | null, Player | null, Player | null],
   [Player | null, Player | null, Player | null],

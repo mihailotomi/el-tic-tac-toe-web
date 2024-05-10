@@ -1,10 +1,8 @@
 import React from "react";
-import { IconButton } from "@mui/material";
-import { Add } from "@mui/icons-material";
-
-import { Club } from "@entities";
 
 import { GameGridInput } from "./components/GameGridInput";
+import { QuestionSquare } from "./components/QuestionSquare";
+import { AnswerSquare } from "./components/AnswerSquare";
 import { useGameGrid } from "./useGameGrid";
 
 import styles from "./GameGrid.module.scss";
@@ -22,44 +20,35 @@ export function GameGrid() {
 
   return (
     <section className={styles.gameGridWrapper}>
+      {/* Input that acts as a modal inside answer grid */}
       <GameGridInput
         key={JSON.stringify(selectedAnswerPosition)}
         isOpen={isInputOpen}
         onChosePlayer={onChosePlayerHandler}
         onCancel={onCancelAnswerHandler}
       />
+
       <div className={styles.gameGrid}>
+        {/* Empty div to take the grid position at 0,0 */}
         <div />
+
+        {/* Upper questions */}
         {questions.x.map((q, index) => (
-          <div className={styles.questionSquare} key={`q-x-${index}`}>
-            {q && <img src={q.crestUrl} alt="" className={styles.questionImg} />}
-          </div>
+          <QuestionSquare question={q} key={`q-x-${index}`} />
         ))}
+
         {answers.map((row, rowIndex) => (
           <React.Fragment key={`row-${rowIndex}`}>
-            <div className={styles.questionSquare} key={`q-y-${rowIndex}`}>
-              {questions.y && questions.y[rowIndex] && (
-                <img src={(questions.y[rowIndex] as Club).crestUrl} alt="" className={styles.questionImg} />
-              )}
-            </div>
+            {/* Question for the row */}
+            <QuestionSquare question={questions.y && questions.y[rowIndex]} key={`q-y-${rowIndex}`} />
+
+            {/* Row anwers */}
             {row.map((_, columnIndex) => (
               <div className={styles.answerSquare} key={`a-${rowIndex}-${columnIndex}`}>
-                {answers[rowIndex][columnIndex] ? (
-                  answers[rowIndex][columnIndex]?.imageUrl ? (
-                    <img src={answers[rowIndex][columnIndex]?.imageUrl} alt="" className={styles.questionImg} />
-                  ) : (
-                    answers[rowIndex][columnIndex]?.lastName
-                  )
-                ) : (
-                  <IconButton
-                    aria-label="add"
-                    size="large"
-                    className={styles.answerSelectButton}
-                    onClick={() => onSelectAnswerPositionHandler(rowIndex, columnIndex)}
-                  >
-                    <Add fontSize="large" />
-                  </IconButton>
-                )}
+                <AnswerSquare
+                  player={answers[rowIndex][columnIndex]}
+                  onSelectAnswerPosition={() => onSelectAnswerPositionHandler(rowIndex, columnIndex)}
+                />
               </div>
             ))}
           </React.Fragment>
