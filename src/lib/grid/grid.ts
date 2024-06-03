@@ -1,6 +1,6 @@
 import { GridPosition, GridType } from "./grid.types";
 
-export function gridInit<T>(value: T): GridType<T> {
+export function initGrid<T>(value: T): GridType<T> {
   return [
     [value, value, value],
     [value, value, value],

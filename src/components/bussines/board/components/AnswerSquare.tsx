@@ -3,19 +3,19 @@ import { Add } from "@mui/icons-material";
 
 import { Player } from "@entities";
 
-import { GridColor } from "../board.types";
+import { SquareColor } from "../board.types";
 
 import styles from "../Board.module.scss";
 
 export type AnswerSquareProps = {
   player: Player | null;
   onSelectAnswerPosition: () => void;
-  color?: GridColor;
+  color?: SquareColor;
 };
 
 export function AnswerSquare({ player, onSelectAnswerPosition, color = "grey" }: AnswerSquareProps) {
   return (
-    <div className={`${styles.answerSquare} ${styles[`grid-color-${  color}`]}`}>
+    <div className={`${styles.answerSquare} ${styles[`square-color-${  color}`]}`}>
       {player ? (
         player?.imageUrl ? (
           <img src={player?.imageUrl} alt="" className={styles.questionImg} />

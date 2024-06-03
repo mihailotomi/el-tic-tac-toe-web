@@ -1,22 +1,16 @@
 import React from "react";
 
+import { initGrid } from "@lib";
+
 import { QuestionSquare } from "./components/QuestionSquare";
 import { AnswerSquare } from "./components/AnswerSquare";
-import { BoardProps } from "./board.types";
+import { BoardProps, SquareColor } from "./board.types";
 import { useBoard } from "./useBoard";
-
-import styles from "./Board.module.scss";
 import { BoardInput } from "./components/BoardInput";
 
-export function Board({
-  gridColors = [
-    ["grey", "grey", "grey"],
-    ["grey", "grey", "grey"],
-    ["grey", "grey", "grey"],
-  ],
-  onAnswerCheck,
-  onValidAnswer,
-}: BoardProps) {
+import styles from "./Board.module.scss";
+
+export function Board({ squareColors = initGrid<SquareColor>("grey"), onAnswerCheck, onValidAnswer }: BoardProps) {
   const {
     questions,
     answers,
@@ -42,19 +36,19 @@ export function Board({
         <div />
 
         {/* Column question squares */}
-        {questions.x.map((q, index) => (
+        {questions.y.map((q, index) => (
           <QuestionSquare question={q} key={`q-x-${index}`} />
         ))}
 
         {answers.map((row, rowIndex) => (
           <React.Fragment key={`row-${rowIndex}`}>
             {/* Row question square */}
-            <QuestionSquare question={questions.y && questions.y[rowIndex]} key={`q-y-${rowIndex}`} />
+            <QuestionSquare question={questions.x && questions.x[rowIndex]} key={`q-y-${rowIndex}`} />
 
             {/* Row anwer squares */}
             {row.map((_, columnIndex) => (
               <AnswerSquare
-                color={gridColors[rowIndex][columnIndex]}
+                color={squareColors[rowIndex][columnIndex]}
                 player={answers[rowIndex][columnIndex]}
                 onSelectAnswerPosition={() => onSelectAnswerPositionHandler(rowIndex, columnIndex)}
                 key={`a-${rowIndex}-${columnIndex}`}

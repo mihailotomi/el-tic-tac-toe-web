@@ -2,17 +2,14 @@ import { useState } from "react";
 
 import { useLazyCheckPlayerMatchQuery, useGetRandomGridQuery } from "@api";
 import { Club, Player } from "@entities";
+import { GridPosition, initGrid, updateGrid } from "@lib";
 
 import { Answers, QuestionsAxis, UseBoardProps } from "./board.types";
 
 export function useBoard({ onAnswerCheck, onValidAnswer }: UseBoardProps) {
   // State
-  const [answers, setAnswers] = useState<Answers>([
-    [null, null, null],
-    [null, null, null],
-    [null, null, null],
-  ]);
-  const [selectedAnswerPosition, setSelectedAnswerPosition] = useState<{ x: number; y: number } | null>(null);
+  const [answers, setAnswers] = useState<Answers>(initGrid<Player | null>(null));
+  const [selectedAnswerPosition, setSelectedAnswerPosition] = useState<GridPosition | null>(null);
 
   // API
   const { data: gridClubs } = useGetRandomGridQuery();
@@ -29,9 +26,7 @@ export function useBoard({ onAnswerCheck, onValidAnswer }: UseBoardProps) {
       const answer = await checkMatch({ player, clubs }).unwrap();
 
       if (answer.isMatch) {
-        const newAnswers: Answers = [[...answers[0]], [...answers[1]], [...answers[2]]];
-        newAnswers[selectedAnswerPosition.y][selectedAnswerPosition.x] = player;
-
+        const newAnswers = updateGrid(answers, player, selectedAnswerPosition);
         setAnswers(newAnswers);
         onValidAnswer(selectedAnswerPosition);
       }
@@ -42,7 +37,7 @@ export function useBoard({ onAnswerCheck, onValidAnswer }: UseBoardProps) {
   };
 
   const onSelectAnswerPositionHandler = (row: number, column: number) => {
-    setSelectedAnswerPosition({ x: column, y: row });
+    setSelectedAnswerPosition({ x: row, y: column });
   };
 
   const onCancelAnswerHandler = () => {
