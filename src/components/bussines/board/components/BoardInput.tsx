@@ -4,15 +4,15 @@ import { AsyncAutocomplete } from "@components/base";
 import { useLazySearchPlayersAutocompleteQuery } from "@api";
 import { Player } from "@entities";
 
-import styles from "../GameGrid.module.scss";
+import styles from "../Board.module.scss";
 
-export type GameGridInputProps = {
+export type BoardInputProps = {
   isOpen: boolean;
   onChosePlayer: (player: Player) => void;
   onCancel: () => void;
 };
 
-export function GameGridInput({ isOpen, onCancel, onChosePlayer }: GameGridInputProps) {
+export function BoardInput({ isOpen, onCancel, onChosePlayer }: BoardInputProps) {
   const [searchPlayers, { data: players, isFetching: isSearchingPlayers }] = useLazySearchPlayersAutocompleteQuery();
 
   return isOpen ? (

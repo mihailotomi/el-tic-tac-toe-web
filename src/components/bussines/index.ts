@@ -1,1 +1,1 @@
-export * from "./game-grid";
+export * from "./board";

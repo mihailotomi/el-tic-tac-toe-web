@@ -16,7 +16,7 @@ export type Answers = [
 
 export type GridColor = "red" | "blue" | "grey";
 
-export type GameGridProps = {
+export type BoardProps = {
   gridColors?: [
     [GridColor, GridColor, GridColor],
     [GridColor, GridColor, GridColor],
@@ -26,4 +26,4 @@ export type GameGridProps = {
   onValidAnswer: (position: { x: number; y: number }) => void;
 };
 
-export type UseGameGridProps = Pick<GameGridProps, "onAnswerCheck" | "onValidAnswer">;
+export type UseBoardProps = Pick<BoardProps, "onAnswerCheck" | "onValidAnswer">;

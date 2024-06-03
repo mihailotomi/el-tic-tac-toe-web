@@ -1,6 +1,6 @@
-import { Question } from "../gameGrid.types";
+import { Question } from "../board.types";
 
-import styles from "../GameGrid.module.scss";
+import styles from "../Board.module.scss";
 
 export type QuestionSquareProps = {
   question: Question | null;

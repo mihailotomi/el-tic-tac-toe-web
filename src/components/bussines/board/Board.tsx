@@ -1,14 +1,14 @@
 import React from "react";
 
-import { GameGridInput } from "./components/GameGridInput";
 import { QuestionSquare } from "./components/QuestionSquare";
 import { AnswerSquare } from "./components/AnswerSquare";
-import { GameGridProps } from "./gameGrid.types";
-import { useGameGrid } from "./useGameGrid";
+import { BoardProps } from "./board.types";
+import { useBoard } from "./useBoard";
 
-import styles from "./GameGrid.module.scss";
+import styles from "./Board.module.scss";
+import { BoardInput } from "./components/BoardInput";
 
-export function GameGrid({
+export function Board({
   gridColors = [
     ["grey", "grey", "grey"],
     ["grey", "grey", "grey"],
@@ -16,7 +16,7 @@ export function GameGrid({
   ],
   onAnswerCheck,
   onValidAnswer,
-}: GameGridProps) {
+}: BoardProps) {
   const {
     questions,
     answers,
@@ -25,19 +25,19 @@ export function GameGrid({
     onCancelAnswerHandler,
     onChosePlayerHandler,
     selectedAnswerPosition,
-  } = useGameGrid({ onAnswerCheck, onValidAnswer });
+  } = useBoard({ onAnswerCheck, onValidAnswer });
 
   return (
-    <section className={styles.gameGridWrapper}>
+    <section className={styles.boardWrapper}>
       {/* Input that acts as a modal inside answer grid */}
-      <GameGridInput
+      <BoardInput
         key={JSON.stringify(selectedAnswerPosition)}
         isOpen={isInputOpen}
         onChosePlayer={onChosePlayerHandler}
         onCancel={onCancelAnswerHandler}
       />
 
-      <div className={styles.gameGrid}>
+      <div className={styles.board}>
         {/* Empty div to take the grid position at 0,0 */}
         <div />
 

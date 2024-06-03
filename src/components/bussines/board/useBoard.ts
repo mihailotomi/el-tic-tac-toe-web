@@ -3,9 +3,9 @@ import { useState } from "react";
 import { useLazyCheckPlayerMatchQuery, useGetRandomGridQuery } from "@api";
 import { Club, Player } from "@entities";
 
-import { Answers, QuestionsAxis, UseGameGridProps } from "./gameGrid.types";
+import { Answers, QuestionsAxis, UseBoardProps } from "./board.types";
 
-export function useGameGrid({ onAnswerCheck, onValidAnswer }: UseGameGridProps) {
+export function useBoard({ onAnswerCheck, onValidAnswer }: UseBoardProps) {
   // State
   const [answers, setAnswers] = useState<Answers>([
     [null, null, null],

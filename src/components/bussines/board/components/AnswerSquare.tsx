@@ -3,9 +3,9 @@ import { Add } from "@mui/icons-material";
 
 import { Player } from "@entities";
 
-import { GridColor } from "../gameGrid.types";
+import { GridColor } from "../board.types";
 
-import styles from "../GameGrid.module.scss";
+import styles from "../Board.module.scss";
 
 export type AnswerSquareProps = {
   player: Player | null;
