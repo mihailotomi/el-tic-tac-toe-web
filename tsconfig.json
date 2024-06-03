@@ -14,7 +14,8 @@
       "@store": ["src/store/"],
       "@components/base": ["src/components/base"],
       "@components/bussines": ["src/components/bussines"],
-      "@providers": ["src/providers"]
+      "@providers": ["src/providers"],
+      "@lib": ["src/lib"]
     },
 
     /* Bundler mode */

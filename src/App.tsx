@@ -11,7 +11,7 @@ function App() {
     // <PersistGate loading={null} persistor={persistor}>
     <MuiThemeProvider>
       <Provider store={store}>
-        <GameGrid />
+        <GameGrid onAnswerCheck={() => {}} onValidAnswer={() => {}} />
       </Provider>
     </MuiThemeProvider>
     // </PersistGate>

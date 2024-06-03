@@ -3,11 +3,20 @@ import React from "react";
 import { GameGridInput } from "./components/GameGridInput";
 import { QuestionSquare } from "./components/QuestionSquare";
 import { AnswerSquare } from "./components/AnswerSquare";
+import { GameGridProps } from "./gameGrid.types";
 import { useGameGrid } from "./useGameGrid";
 
 import styles from "./GameGrid.module.scss";
 
-export function GameGrid() {
+export function GameGrid({
+  gridColors = [
+    ["grey", "grey", "grey"],
+    ["grey", "grey", "grey"],
+    ["grey", "grey", "grey"],
+  ],
+  onAnswerCheck,
+  onValidAnswer,
+}: GameGridProps) {
   const {
     questions,
     answers,
@@ -16,7 +25,7 @@ export function GameGrid() {
     onCancelAnswerHandler,
     onChosePlayerHandler,
     selectedAnswerPosition,
-  } = useGameGrid();
+  } = useGameGrid({ onAnswerCheck, onValidAnswer });
 
   return (
     <section className={styles.gameGridWrapper}>
@@ -32,24 +41,24 @@ export function GameGrid() {
         {/* Empty div to take the grid position at 0,0 */}
         <div />
 
-        {/* Upper questions */}
+        {/* Column question squares */}
         {questions.x.map((q, index) => (
           <QuestionSquare question={q} key={`q-x-${index}`} />
         ))}
 
         {answers.map((row, rowIndex) => (
           <React.Fragment key={`row-${rowIndex}`}>
-            {/* Question for the row */}
+            {/* Row question square */}
             <QuestionSquare question={questions.y && questions.y[rowIndex]} key={`q-y-${rowIndex}`} />
 
-            {/* Row anwers */}
+            {/* Row anwer squares */}
             {row.map((_, columnIndex) => (
-              <div className={styles.answerSquare} key={`a-${rowIndex}-${columnIndex}`}>
-                <AnswerSquare
-                  player={answers[rowIndex][columnIndex]}
-                  onSelectAnswerPosition={() => onSelectAnswerPositionHandler(rowIndex, columnIndex)}
-                />
-              </div>
+              <AnswerSquare
+                color={gridColors[rowIndex][columnIndex]}
+                player={answers[rowIndex][columnIndex]}
+                onSelectAnswerPosition={() => onSelectAnswerPositionHandler(rowIndex, columnIndex)}
+                key={`a-${rowIndex}-${columnIndex}`}
+              />
             ))}
           </React.Fragment>
         ))}

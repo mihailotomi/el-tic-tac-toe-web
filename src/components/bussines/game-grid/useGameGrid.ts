@@ -1,11 +1,11 @@
 import { useState } from "react";
 
 import { useLazyCheckPlayerMatchQuery, useGetRandomGridQuery } from "@api";
-
 import { Club, Player } from "@entities";
-import { Answers, QuestionsAxis } from "./gameGrid.types";
 
-export function useGameGrid() {
+import { Answers, QuestionsAxis, UseGameGridProps } from "./gameGrid.types";
+
+export function useGameGrid({ onAnswerCheck, onValidAnswer }: UseGameGridProps) {
   // State
   const [answers, setAnswers] = useState<Answers>([
     [null, null, null],
@@ -29,11 +29,14 @@ export function useGameGrid() {
       const answer = await checkMatch({ player, clubs }).unwrap();
 
       if (answer.isMatch) {
-        const newAnswers = [[...answers[0]], [...answers[1]], [...answers[2]]] as Answers;
+        const newAnswers: Answers = [[...answers[0]], [...answers[1]], [...answers[2]]];
         newAnswers[selectedAnswerPosition.y][selectedAnswerPosition.x] = player;
 
         setAnswers(newAnswers);
+        onValidAnswer(selectedAnswerPosition);
       }
+
+      onAnswerCheck();
       setSelectedAnswerPosition(null);
     }
   };
