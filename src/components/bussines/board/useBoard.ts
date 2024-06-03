@@ -23,6 +23,8 @@ export function useBoard({ onAnswerCheck, onValidAnswer }: UseBoardProps) {
   const onChosePlayerHandler = async (player: Player) => {
     if (selectedAnswerPosition) {
       const clubs = [questionsX[selectedAnswerPosition.x], questionsY[selectedAnswerPosition.y]] as Club[];
+      console.log(clubs, player);
+      
       const answer = await checkMatch({ player, clubs }).unwrap();
 
       if (answer.isMatch) {
