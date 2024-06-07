@@ -2,7 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
-import { gridApi } from "./api/gridApi";
+import { gridApi } from "./api/grid/gridApi";
 import { playersApi } from "./api";
 
 export const store = configureStore({
