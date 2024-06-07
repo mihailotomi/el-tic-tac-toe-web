@@ -15,13 +15,9 @@ export type AnswerSquareProps = {
 
 export function AnswerSquare({ player, onSelectAnswerPosition, color = "grey" }: AnswerSquareProps) {
   return (
-    <div className={`${styles.answerSquare} ${styles[`square-color-${  color}`]}`}>
+    <div className={`${styles.answerSquare} ${styles[`square-color-${color}`]}`}>
       {player ? (
-        player?.imageUrl ? (
-          <img src={player?.imageUrl} alt="" className={styles.questionImg} />
-        ) : (
-          player?.lastName
-        )
+        <img src={player?.imageUrl} alt={player?.lastName} className={styles.questionImg} />
       ) : (
         <IconButton
           aria-label="add"

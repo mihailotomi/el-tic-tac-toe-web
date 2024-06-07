@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-import { useLazyCheckPlayerMatchQuery, useGetRandomGridQuery } from "@api";
-import { Club, Player } from "@entities";
+import { useLazyCheckPlayerMatchQuery, useGetRandomGridQuery, GridItem } from "@api";
+import { Player } from "@entities";
 import { GridPosition, initGrid, updateGrid } from "@lib";
 
 import { Answers, QuestionsAxis, UseBoardProps } from "./board.types";
@@ -22,10 +22,10 @@ export function useBoard({ onAnswerCheck, onValidAnswer }: UseBoardProps) {
   // Event handlers
   const onChosePlayerHandler = async (player: Player) => {
     if (selectedAnswerPosition) {
-      const clubs = [questionsX[selectedAnswerPosition.x], questionsY[selectedAnswerPosition.y]] as Club[];
-      console.log(clubs, player);
-      
-      const answer = await checkMatch({ player, clubs }).unwrap();
+      const gridItems = [questionsX[selectedAnswerPosition.x], questionsY[selectedAnswerPosition.y]] as GridItem[];
+      console.log(gridItems, player);
+
+      const answer = await checkMatch({ player, gridItems }).unwrap();
 
       if (answer.isMatch) {
         const newAnswers = updateGrid(answers, player, selectedAnswerPosition);

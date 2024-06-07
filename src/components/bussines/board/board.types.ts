@@ -1,7 +1,8 @@
-import { Club, Player } from "@entities";
+import { Player } from "@entities";
 import { GridType } from "@lib";
+import { GridItem } from "@api";
 
-export type Question = Club | null;
+export type Question = GridItem | null;
 
 export type QuestionsAxis = [Question, Question, Question];
 
