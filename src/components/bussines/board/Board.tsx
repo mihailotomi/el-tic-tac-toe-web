@@ -10,7 +10,11 @@ import { BoardInput } from "./components/BoardInput";
 
 import styles from "./Board.module.scss";
 
-export function Board({ squareColors = initGrid<SquareColor>("grey"), onAnswerCheck, onValidAnswer }: BoardProps) {
+export function Board({
+  squareColors = initGrid<SquareColor>("grey"),
+  onAnswerCheck = () => {},
+  onValidAnswer = () => {},
+}: BoardProps) {
   const {
     questions,
     answers,

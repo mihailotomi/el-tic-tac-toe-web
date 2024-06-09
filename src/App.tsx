@@ -1,8 +1,8 @@
 import { Provider } from "react-redux";
+import { RouterProvider } from "react-router-dom";
 
 import { store } from "@store";
-import { MuiThemeProvider } from "@providers";
-import { LocalMultiplayerGame } from "@components/bussines";
+import { MuiThemeProvider, router } from "@providers";
 
 import "./styles/index.scss";
 
@@ -11,7 +11,7 @@ function App() {
     // <PersistGate loading={null} persistor={persistor}>
     <MuiThemeProvider>
       <Provider store={store}>
-        <LocalMultiplayerGame />
+      <RouterProvider router={router} />
       </Provider>
     </MuiThemeProvider>
     // </PersistGate>
