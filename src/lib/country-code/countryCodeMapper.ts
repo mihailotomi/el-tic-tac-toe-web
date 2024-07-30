@@ -54,6 +54,7 @@ const countryCodesMapping: { [key: string]: string } = {
   CRI: "CR",
   CIV: "CI",
   HRV: "HR",
+  CRO: "HR",
   CUB: "CU",
   CUW: "CW",
   CYP: "CY",
@@ -245,6 +246,4 @@ const countryCodesMapping: { [key: string]: string } = {
   ZWE: "ZW",
 };
 
-export const countryCodeLongToShort = (longCode: string) => {
-  return countryCodesMapping[longCode] || null;
-};
+export const countryCodeLongToShort = (longCode: string) => countryCodesMapping[longCode] || null;

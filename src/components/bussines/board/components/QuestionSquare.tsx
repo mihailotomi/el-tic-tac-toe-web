@@ -13,8 +13,8 @@ export function QuestionSquare({ question }: QuestionSquareProps) {
     <div className={styles.questionSquare}>
       {question && (
         <img
-          src={isCountryItem(question) ? getCountryFlagUrl(question.country) : question.club.crestUrl}
-          alt={isCountryItem(question) ? question.country : question.club.name}
+          src={isCountryItem(question) ? getCountryFlagUrl(question.item) : question.item.crestUrl}
+          alt={isCountryItem(question) ? question.item : question.item.name}
           className={isCountryItem(question) ? styles.questionFlag : styles.questionCrest}
         />
       )}

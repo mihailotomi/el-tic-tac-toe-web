@@ -1,15 +1,20 @@
 import { Club } from "@entities";
 
-type ClubItem = { itemType: "club"; club: Club };
+export enum GridItemType {
+  CLUB = "CLUB",
+  COUNTRY = "COUNTRY",
+}
 
-type CountryItem = { itemType: "country"; country: string };
+type ClubItem = { type: GridItemType.CLUB; item: Club };
+
+type CountryItem = { type: GridItemType.COUNTRY; item: string };
 
 export type GridItem = ClubItem | CountryItem;
 
 export function isClubItem(item: GridItem): item is ClubItem {
-  return item.itemType === "club";
+  return item.type === GridItemType.CLUB;
 }
 
 export function isCountryItem(item: GridItem): item is CountryItem {
-  return item.itemType === "country";
+  return item.type === GridItemType.COUNTRY;
 }

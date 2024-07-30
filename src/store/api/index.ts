@@ -1,2 +1,2 @@
-export * from "./playersApi";
+export * from "./players";
 export * from "./grid";

@@ -1,10 +1,11 @@
 import { useState } from "react";
 
-import { useLazyCheckPlayerMatchQuery, useGetRandomGridQuery, GridItem } from "@api";
+import { useLazyCheckPlayerConstraintsQuery, useGetRandomGridQuery, GridItem } from "@api";
 import { Player } from "@entities";
 import { GridPosition, initGrid, updateGrid } from "@lib";
 
 import { Answers, QuestionsAxis, UseBoardProps } from "./board.types";
+import { mapGridItemToConstraint } from "./lib/mapGridItemToConstraint";
 
 export function useBoard({ onAnswerCheck, onValidAnswer }: UseBoardProps) {
   // State
@@ -13,7 +14,7 @@ export function useBoard({ onAnswerCheck, onValidAnswer }: UseBoardProps) {
 
   // API
   const { data: gridClubs } = useGetRandomGridQuery();
-  const [checkMatch] = useLazyCheckPlayerMatchQuery();
+  const [checkMatch] = useLazyCheckPlayerConstraintsQuery();
 
   // Computed variables
   const questionsX: QuestionsAxis = gridClubs?.x || [null, null, null];
@@ -23,11 +24,11 @@ export function useBoard({ onAnswerCheck, onValidAnswer }: UseBoardProps) {
   const onChosePlayerHandler = async (player: Player) => {
     if (selectedAnswerPosition) {
       const gridItems = [questionsX[selectedAnswerPosition.x], questionsY[selectedAnswerPosition.y]] as GridItem[];
-      console.log(gridItems, player);
+      const constraints = gridItems.map(mapGridItemToConstraint);
 
-      const answer = await checkMatch({ player, gridItems }).unwrap();
+      const isMatch = await checkMatch({ player, constraints }).unwrap();
 
-      if (answer.isMatch) {
+      if (isMatch) {
         const newAnswers = updateGrid(answers, player, selectedAnswerPosition);
         setAnswers(newAnswers);
         onValidAnswer(selectedAnswerPosition);
