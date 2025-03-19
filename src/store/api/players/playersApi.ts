@@ -7,6 +7,7 @@ export const playersApi = createApi({
   reducerPath: "playersApi",
   baseQuery: fetchBaseQuery({
     baseUrl: `https://localhost:7110/`,
+    credentials: 'include'
   }),
   endpoints: (builder) => ({
     searchPlayersAutocomplete: builder.query<Player[], string>({

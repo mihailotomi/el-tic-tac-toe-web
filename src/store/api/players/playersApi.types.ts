@@ -1,7 +1,7 @@
 import { GridItemType } from "../grid";
 
-type PlayerClubConstraint = { type: GridItemType.CLUB; id: number };
-
-type PlayerCountryConstraint = { type: GridItemType.COUNTRY; code: string };
+type BasePlayerConstraint = { item: string };
+type PlayerClubConstraint = { type: GridItemType.CLUB; } & BasePlayerConstraint;
+type PlayerCountryConstraint = { type: GridItemType.COUNTRY; } & BasePlayerConstraint;
 
 export type PlayerConstraint = PlayerClubConstraint | PlayerCountryConstraint;

@@ -1,23 +1,16 @@
 import { createBrowserRouter } from "react-router-dom";
-import { Board, LocalMultiplayerGame } from "@components/bussines";
+
+import { Board, LocalMultiplayerGame, SquareColor } from "@components/bussines";
 import { initGrid } from "@lib";
-import { SquareColor } from "src/components/bussines/board/board.types";
+import { GameMode, Home } from "@screens";
+
 import ErrorRoute from "./ErrorRoute";
 
 export const router = createBrowserRouter([
+  { path: "/", element: <Home />, errorElement: <ErrorRoute /> },
   {
-    path: "/",
-    element: (
-      <div>
-        Choose mode: <br />
-        <p>
-          <a href="/single-player">Single player</a>
-        </p>
-        <p>
-          <a href="/local-multiplayer">Play with a friend</a>
-        </p>
-      </div>
-    ),
+    path: "/choose-mode",
+    element: <GameMode />,
     errorElement: <ErrorRoute />,
   },
   {

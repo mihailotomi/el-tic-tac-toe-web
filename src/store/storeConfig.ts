@@ -2,16 +2,16 @@ import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
-import { gridApi } from "./api/grid/gridApi";
-import { playersApi } from "./api";
+import { accountsApi, gridApi, playersApi } from "./api";
 
 export const store = configureStore({
   reducer: {
     [gridApi.reducerPath]: gridApi.reducer,
     [playersApi.reducerPath]: playersApi.reducer,
+    [accountsApi.reducerPath]: accountsApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({ serializableCheck: false }).concat(gridApi.middleware, playersApi.middleware),
+    getDefaultMiddleware({ serializableCheck: false }).concat(gridApi.middleware, playersApi.middleware, accountsApi.middleware),
 });
 
 setupListeners(store.dispatch);

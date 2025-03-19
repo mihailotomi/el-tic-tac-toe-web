@@ -1,0 +1,39 @@
+@import '../../styles/variables';
+
+.container {
+  text-align: center;
+  padding-top: max(2rem, 15vh);
+  padding-bottom: max(2rem, 15vh);
+  padding-left: max(1rem, 5vw);
+  padding-right: max(1rem, 5vw);
+
+  box-shadow: 0.05rem 0.05rem 0.5rem #FFFFFF;
+}
+
+.logo {
+  margin: 0;
+  width: min(30vh, 30vw);
+}
+
+.tagline {
+  font-size: 3rem;
+  margin-top: 1rem;
+}
+
+.loginButton {
+  margin-top: 2rem;
+  padding: min(1rem, 5vh) 32px;
+  border: none;
+  border-radius: 25px;
+  background-color: #FFFFFF;
+  color: $primary-color;
+  font-size: min(2rem, 10vh);
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  display: block;
+
+  &:hover {
+    background-color: #f7f7f7;
+  }
+}

@@ -1,0 +1,12 @@
+<svg width="80%" height="80%" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" style="background-color: #F15A29;">
+  <!-- Basketball Icon in the center cell, scaled 3.75x (an extra 25% increase) -->
+  <!-- New circle: centered at (150,150) with radius 112.5 (30 * 3.75) -->
+  <circle cx="150" cy="150" r="112.5" fill="transparent" stroke="#FFFFFF" stroke-width="15" />
+  
+  <!-- Scaled basketball panel lines using the transformation:
+       new_point = 150 + 3.75 * (old_point - 150) -->
+  <path d="M75,75 Q131.25,150 225,225" stroke="#FFFFFF" stroke-width="11.25" fill="none"/>
+  <path d="M45,131.25 Q150,150 150,37.5" stroke="#FFFFFF" stroke-width="11.25" fill="none"/>
+  <path d="M131.25,262.5 Q150,150 270,150" stroke="#FFFFFF" stroke-width="11.25" fill="none"/>
+  <path d="M75,232.5 Q131.25,131.25 255,93.75" stroke="#FFFFFF" stroke-width="11.25" fill="none"/>
+</svg>

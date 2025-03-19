@@ -1,8 +1,7 @@
-import { isCountryItem } from "src/store";
+import { isCountryItem } from "@store";
 import { Question } from "../board.types";
 
 import styles from "../Board.module.scss";
-import { getCountryFlagUrl } from "../lib";
 
 export type QuestionSquareProps = {
   question: Question | null;
@@ -13,8 +12,8 @@ export function QuestionSquare({ question }: QuestionSquareProps) {
     <div className={styles.questionSquare}>
       {question && (
         <img
-          src={isCountryItem(question) ? getCountryFlagUrl(question.item) : question.item.crestUrl}
-          alt={isCountryItem(question) ? question.item : question.item.name}
+          src={question.imageUrl}
+          alt={question.imageUrl}
           className={isCountryItem(question) ? styles.questionFlag : styles.questionCrest}
         />
       )}

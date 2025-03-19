@@ -1,13 +1,11 @@
-import { Club } from "@entities";
-
 export enum GridItemType {
   CLUB = "CLUB",
   COUNTRY = "COUNTRY",
 }
 
-type ClubItem = { type: GridItemType.CLUB; item: Club };
-
-type CountryItem = { type: GridItemType.COUNTRY; item: string };
+type BaseGridItem = { item: string; imageUrl: string };
+type ClubItem = { type: GridItemType.CLUB } & BaseGridItem;
+type CountryItem = { type: GridItemType.COUNTRY } & BaseGridItem;
 
 export type GridItem = ClubItem | CountryItem;
 

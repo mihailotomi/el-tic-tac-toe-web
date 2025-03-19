@@ -1,8 +1,12 @@
-html,
-body,
-#root,
-#root > div {
-  height: 100%;
-  width: 100%;
-  box-sizing: border-box;
+@import './variables';
+
+body {
+  margin: 0;
+  font-family: $font-family;
+  background: linear-gradient(45deg, $primary-color, $accent-color);
+  color: $text-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
